@@ -22,7 +22,6 @@ public class TriviaApp{
         int numberOfQuestions= input.nextInt();
         */
         main.createLinkedList(4, "nickname");
-
         main.start();
         String answer= input.nextLine();
         main.check(answer);
