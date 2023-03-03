@@ -15,9 +15,6 @@ public class Main {
         bst.addRoot(array);
         System.out.println("La profundidad maxima del arbol es: "+ bst.depth());
         bst.printFromRight();
-
-
-
     }
 
 }
