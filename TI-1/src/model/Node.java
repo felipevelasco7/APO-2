@@ -4,9 +4,8 @@ public class Node {
     private Node left;
     private Node right;
 
-    private Node ladder;
-    private Node snake;
-
+    private int ladder;
+    private char snake='0';
     private int number;
 
     private Player player1;
@@ -35,19 +34,19 @@ public class Node {
         this.right = right;
     }
 
-    public Node getLadder() {
+    public int getLadder() {
         return ladder;
     }
 
-    public void setLadder(Node ladder) {
+    public void setLadder(int ladder) {
         this.ladder = ladder;
     }
 
-    public Node getSnake() {
+    public char getSnake() {
         return snake;
     }
 
-    public void setSnake(Node snake) {
+    public void setSnake(char snake) {
         this.snake = snake;
     }
 

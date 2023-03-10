@@ -1,7 +1,9 @@
 package model;
 
 public class Score {
+
     private double score;
+
     private Score left;
     private Score right;
 
@@ -9,7 +11,6 @@ public class Score {
     public Score(double score){
         this.score=score;
     }
-
 
 
 

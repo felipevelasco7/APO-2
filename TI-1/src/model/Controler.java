@@ -13,9 +13,10 @@ public class Controler {
 
 
     public void generateBoard(int n, int m, int s, int e){
-        int numberOfSquares=n*m;
-        list.addNodeAtTail(numberOfSquares);
+        list.generateBoard(n,m,s,e);
+
     }
+    
 
     public void showBoard(){
 

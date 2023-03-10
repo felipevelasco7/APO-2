@@ -9,6 +9,7 @@ public class SnakesAndLaddersApp{
     public static void main(String args[]) {
         SnakesAndLaddersApp objMain= new SnakesAndLaddersApp();
         controler= new Controler();
+        controler.generateBoard(5, 4, 0, 0);
         
     }
     
