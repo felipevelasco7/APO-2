@@ -29,4 +29,19 @@ public class ScoresBST {
 
 
     }
+
+    public String printFromRight(){
+        String scores="";
+        return printFromRight(root, scores);
+    }
+wdjkjdhc
+    private String printFromRight(Score pointer, String scores){
+        if(pointer !=null){
+            printFromRight(pointer.getRight(),scores);
+            scores+=pointer.getScore()+" ";
+            printFromRight(pointer.getLeft(),scores);
+
+        }
+        return scores;
+    }
 }

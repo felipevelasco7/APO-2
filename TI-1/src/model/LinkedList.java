@@ -5,17 +5,18 @@ import java.util.Random;
 public class LinkedList {
     private Node head;
     private Node tail;
+    Random random = new Random();
+
 
 
     public void generateBoard(int n, int m, int s,int e){
-        
+        tail=null;
+        head=null;
         generateBoard(m*n, 0);
         generateSnakes(s,m*n,head);
         generateLadders(e,m*n, head);
-        print(n,m);
     }
 
-    
     private void generateBoard(int numberOfSquares, int i){
         if(i<numberOfSquares){
 
@@ -37,12 +38,10 @@ public class LinkedList {
         
     }
 
-
     private void generateLadders(int e, int mn, Node head){
-        Random random = new Random();
         if (e > 0) {
-            Node node1 = getRandomNode(random, mn, head);
-            Node node2 = getRandomNode(random, mn, node1);
+            Node node1 = getRandomNode(mn, head);
+            Node node2 = getRandomNode( mn, node1);
             node1.setLadder(e);
             node2.setLadder(e);
             generateLadders(e - 1, mn, head);
@@ -50,10 +49,9 @@ public class LinkedList {
     }
 
     private void generateSnakes(int s, int mn, Node head){
-        Random random = new Random();
         if (s > 0) {
-            Node node1 = getRandomNode(random, mn, head);
-            Node node2 = getRandomNode(random, mn, node1);
+            Node node1 = getRandomNode( mn, head);
+            Node node2 = getRandomNode( mn, node1);
             int index = s-1;  // La letra que se le va a asignar
             char c = (char) ('A' + (index % 26)); // si el index es 0 se asigna la letra A, despues B, C..
             node1.setSnake(c);
@@ -62,11 +60,11 @@ public class LinkedList {
         }
     }
 
-    private Node getRandomNode(Random random, int mn, Node head){
-        int randIndex1 = random.nextInt(mn-1)+1;
+    private Node getRandomNode(int mn, Node pointer){
+        int randIndex1 = random.nextInt(mn-2)+2;
         Node node1=getNodeAtIndex(head, randIndex1);
-        if(node1.getLadder()!=0 || node1.getSnake()!='0' || node1==head){
-            return node1=getRandomNode(random, mn, head);                      //???? return??
+        if(node1.getLadder()!=0 || node1.getSnake()!='0' || node1==head || node1==pointer || node1==tail){
+            return node1=getRandomNode( mn, head);                      //???? return??
         }
         else return node1;
 
@@ -74,7 +72,7 @@ public class LinkedList {
 
     private Node getNodeAtIndex(Node pointer, int index) {
         if (index < 0 || pointer == null) {//no encuentra el index 
-            return null;
+            return getNodeAtIndex(head, index);
         } else if (index == 0) {// cuando el index es 0 significa que ya llego al nodo que se busca
             return pointer;
         } else { //se busca recursivamente el right
@@ -82,91 +80,157 @@ public class LinkedList {
         }
     }
 
-
-
-    public void print(int n, int m){
-    
-        //print(getNodeAtIndex(head, m*n-n), n, n, m);
-        print(getNodeAtIndex(head, m*n-n), n, n, m);
-
-    }
-
-    
-
-
-    // private void print(Node pointer, int x, int n, int m){
-
-    //     if(pointer!=null && m>0){
-
-
-    //         if(n>0){
-    //             if(pointer.getNumber()>10){
-    //                 System.out.print("    ["+pointer.getNumber()+"]   ");
-    //             }
-    //             else  System.out.print("    ["+pointer.getNumber()+"]    ");
-
-    //             print(pointer.getLeft(), x, n-1, m);
-    //         }
-    //         else {
-    //             n=x;
-    //             System.out.println();
-    //             print(pointer, x, n, m-1);
-    //         }
-    //     }
-    // }
-
     public Node findNode(Node pointer, int value){
         if(pointer!=null && pointer.getNumber()!=value){ // hace la recursion cuando no encunetra al nodo
-            findNode(pointer.getRight(),value);
+            return findNode(pointer.getRight(),value);
         }
-        return pointer; // null cuando no lo encuentra
+        else return pointer; // null cuando no lo encuentra
     }
+
+    public Node findLadder(Node pointer, int value){
+        if(pointer!=null && pointer.getLadder()==value){
+            return pointer;   
+        }
+        else return findLadder(pointer.getRight(),value);  // hace la recursion cuando no encunetra al nodo
+    }
+
+    public Node findSnake(Node pointer, int value){
+        if(pointer!=null && pointer.getSnake()==value){
+            return pointer;   
+        }
+        else return findSnake(pointer.getRight(),value);  // hace la recursion cuando no encunetra al nodo
+    }
+
+    public void movePlayer(String value, int num){
+        movePlayer(head, value, num);
+
+    }
+
+    private void movePlayer(Node pointer, String player, int num){
+
+        if(pointer!=null && pointer.getPlayer1()!=null&& pointer.getPlayer1().getSymbol()==player) { // encuentra el nodo en el que esta jugador
+            Node newPosition= findNode(head, pointer.getNumber()+num);//nodo al que se va a mover
+            newPosition.setPlayer1(pointer.getPlayer1());
+            pointer.setPlayer1(null);
+            //revisa escaleras y serpientes en el nuevo nodo
+            if(newPosition.getLadder()!=0) movePlayer(newPosition, player, findLadder(newPosition.getRight(), newPosition.getLadder()).getNumber()-newPosition.getNumber());
+            if(newPosition.getSnake()!='0') movePlayer(newPosition, player, findSnake(head, newPosition.getNumber()-newPosition.getSnake()).getNumber());
+
+        }
+        else if(pointer!=null && pointer.getPlayer2()!=null&& pointer.getPlayer2().getSymbol()==player) {
+
+            Node newPosition= findNode(head, pointer.getNumber()+num);
+            newPosition.setPlayer2(pointer.getPlayer2());
+            pointer.setPlayer2(null);
+            if(newPosition.getLadder()!=0) movePlayer(newPosition, player, findLadder(newPosition.getRight(), newPosition.getLadder()).getNumber()-newPosition.getNumber());
+            if(newPosition.getSnake()!='0') movePlayer(newPosition, player, findSnake(head, newPosition.getNumber()-newPosition.getSnake()).getNumber());
+
+        }
+        else if(pointer!=null && pointer.getPlayer3()!=null&& pointer.getPlayer3().getSymbol()==player) {
+            Node newPosition= findNode(head, pointer.getNumber()+num);
+            newPosition.setPlayer3(pointer.getPlayer3());
+            pointer.setPlayer3(null);
+            if(newPosition.getLadder()!=0) movePlayer(newPosition, player, findLadder(newPosition.getRight(), newPosition.getLadder()).getNumber()-newPosition.getNumber());
+            if(newPosition.getSnake()!='0') movePlayer(newPosition, player, findSnake(head, newPosition.getNumber()-newPosition.getSnake()).getNumber());
+
+        }
+        else movePlayer(pointer.getRight(),player, num);// recursion hasta que encuentre el nodo en el que esta el jugador
+
+    }
+
+    public String print(int n, int m){
+    
+        String string="";
+
+        if(m%2==0){ //si el numero de filas es par comienza por el tail
+           string=print(tail, n, n, m);
+        }
+        else {// si es impar comienza en tail-n
+            string=print(getNodeAtIndex(head, m*n-n), n, n, m);
+        }
+        return string;
+    }
+
 
     private String print(Node pointer, int x, int n, int m){
-
+       String string="";
         if(m>0){
             if(pointer!=null && n>0){
-                if(pointer.getNumber()>10){
-                    System.out.print("    ["+pointer.getNumber()+"]   ");
-                }
-                else  System.out.print("    ["+pointer.getNumber()+"]    ");
 
-                if(m%2==0){
-                    print(pointer.getRight(), x, n-1, m);
+                if(pointer.getNumber()>10 ||pointer.getPlayer1()!=null || pointer.getPlayer2()!=null || pointer.getPlayer3()!=null ){ //anade el numero al string
+                    string+="   ["+pointer.getNumber();
+                    if(pointer.getPlayer1()!=null) string+= pointer.getPlayer1().getSymbol();
+                    if(pointer.getPlayer2()!=null) string+=pointer.getPlayer2().getSymbol();
+                    if(pointer.getPlayer3()!=null) string+=pointer.getPlayer3().getSymbol();
+                    string+="]   ";
+
+                } else  string+="   ["+pointer.getNumber()+"]    " ;
+        
+                if(n>1){// recursion para añadir los otros numeros al string
+                    if(m%2==0){ //si la fila es par es en orden descendente
+                        return string+= print(pointer.getLeft(), x, n-1, m);
+                    }
+                    else {// si es impar es en oden ascendente
+                        return string+= print(pointer.getRight(), x, n-1, m);
+                    }
+                }else{// si n==1, ya es el ultimo de la fila 
+                    
+                    return string+="\n"+ print(findNode(head, pointer.getNumber()-x), x, x, m-1);
                 }
-                else {
-                    print(pointer.getLeft(), x, n-1, m);
-                }
-            }
-            else {
-                System.out.println();
-                print(getNodeAtIndex(head, x*m-x-1), x, x, m-1);
             }
         }
-        
+        return string; 
     }
 
-    // private void print(Node pointer, int x, int n, int m){
 
-    //     if(m>0){
-    //         if(pointer!=null && n>0){
-    //             if(pointer.getNumber()>10){
-    //                 System.out.print("    ["+pointer.getNumber()+"]   ");
-    //             }
-    //             else  System.out.print("    ["+pointer.getNumber()+"]    ");
+    public String showSnakesAndLadders(int n, int m){
+    
+        String string="";
 
-    //             if(m%2==0){
-    //                 print(pointer.getRight(), x, n-1, m);
-    //             }
-    //             else {
-    //                 print(pointer.getLeft(), x, n-1, m);
-    //             }
-    //         }
-    //         else {
-    //             System.out.println();
-    //             print(getNodeAtIndex(head, x*m-x-1), x, x, m-1);
-    //         }
-    //     }
-    // }
+        if(m%2==0){ //si el numero de filas es par comienza por el tail
+           string=showSnakesAndLadders(tail, n, n, m);
+        }
+        else {// si es impar comienza en tail-n
+            string=showSnakesAndLadders(getNodeAtIndex(head, m*n-n), n, n, m);
+        }
+        return string;
+    }
+
+
+    private String showSnakesAndLadders(Node pointer, int x, int n, int m){
+       String string="";
+        if(m>0){
+            if(pointer!=null && n>0){
+
+                if(pointer.getSnake()!='0'){ //anade el char de la serpiente al string
+                    string+="   ["+pointer.getSnake()+"]    ";
+
+                } else if(pointer.getLadder()!=0){ //anade el char de la serpiente al string
+                    string+="   ["+pointer.getLadder()+"]    ";
+
+                }else  string+="   [ ]    " ;// vacio si no hay serpiente
+        
+                if(n>1){// recursion para añadir las otras casillas al string
+                    if(m%2==0){ //si la fila es par es en orden descendente
+                        return string+= showSnakesAndLadders(pointer.getLeft(), x, n-1, m);
+                    }
+                    else {// si es impar es en oden ascendente
+                        return string+= showSnakesAndLadders(pointer.getRight(), x, n-1, m);
+                    }
+                }else{// si n==1, ya es el ultimo de la fila 
+                    
+                    return string+="\n"+ showSnakesAndLadders(findNode(head, pointer.getNumber()-x), x, x, m-1);
+                }
+            }
+        }
+        return string; 
+    }
+
+    public boolean checkwinner(){
+        boolean winner=false;
+        if(tail.getPlayer1()!=null || tail.getPlayer2()!=null ||tail.getPlayer3()!=null) winner=true;
+        return winner;
+    }
+
 
 }
