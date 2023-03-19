@@ -7,8 +7,6 @@ public class LinkedList {
     private Node tail;
     Random random = new Random();
 
-
-
     public void generateBoard(int n, int m, int s,int e){
         tail=null;
         head=null;
@@ -61,7 +59,7 @@ public class LinkedList {
     }
 
     private Node getRandomNode(int mn, Node pointer){
-        int randIndex1 = random.nextInt(mn-2)+2;
+        int randIndex1 = random.nextInt(mn-2)+1;
         Node node1=getNodeAtIndex(head, randIndex1);
         if(node1.getLadder()!=0 || node1.getSnake()!='0' || node1==head || node1==pointer || node1==tail){
             return node1=getRandomNode( mn, head);                      //???? return??
@@ -81,24 +79,37 @@ public class LinkedList {
     }
 
     public Node findNode(Node pointer, int value){
-        if(pointer!=null && pointer.getNumber()!=value){ // hace la recursion cuando no encunetra al nodo
-            return findNode(pointer.getRight(),value);
+        if(pointer!=null && pointer.getNumber()==value){ 
+            
+            return pointer;
         }
-        else return pointer; // null cuando no lo encuentra
+        else if (pointer!= null)return findNode(pointer.getRight(),value); // hace la recursion cuando no encunetra al nodo
+        else return tail; // null cuando no lo encuentra
     }
 
-    public Node findLadder(Node pointer, int value){
-        if(pointer!=null && pointer.getLadder()==value){
-            return pointer;   
+    public boolean findLadder(Node pointer, int value, Player player, String playerSymbol){
+        if(pointer!=null && pointer.getLadder()==value) {
+            if(playerSymbol.equalsIgnoreCase("$")) pointer.setPlayer1(player);
+            else if(playerSymbol.equalsIgnoreCase("%")) pointer.setPlayer2(player);
+            else if (playerSymbol.equalsIgnoreCase("&")) pointer.setPlayer3(player);
+            return true;
         }
-        else return findLadder(pointer.getRight(),value);  // hace la recursion cuando no encunetra al nodo
-    }
-
-    public Node findSnake(Node pointer, int value){
-        if(pointer!=null && pointer.getSnake()==value){
-            return pointer;   
+        else if(pointer!=null) return findLadder(pointer.getRight(), value, player, playerSymbol);
+        else return false;
+    
+    } 
+    
+    public boolean findSnakeTail(Node pointer, char value, Player player, String playerSymbol){
+        
+        if(pointer!=null && pointer.getSnake()==value) {
+            if(playerSymbol.equalsIgnoreCase("$")) pointer.setPlayer1(player);
+            else if(playerSymbol.equalsIgnoreCase("%")) pointer.setPlayer2(player);
+            else if (playerSymbol.equalsIgnoreCase("&")) pointer.setPlayer3(player);
+            return true;
         }
-        else return findSnake(pointer.getRight(),value);  // hace la recursion cuando no encunetra al nodo
+        else if(pointer!=null) return findSnakeTail(pointer.getLeft(), value, player, playerSymbol);
+        else return false;
+    
     }
 
     public void movePlayer(String value, int num){
@@ -113,28 +124,28 @@ public class LinkedList {
             newPosition.setPlayer1(pointer.getPlayer1());
             pointer.setPlayer1(null);
             //revisa escaleras y serpientes en el nuevo nodo
-            if(newPosition.getLadder()!=0) movePlayer(newPosition, player, findLadder(newPosition.getRight(), newPosition.getLadder()).getNumber()-newPosition.getNumber());
-            if(newPosition.getSnake()!='0') movePlayer(newPosition, player, findSnake(head, newPosition.getNumber()-newPosition.getSnake()).getNumber());
-
+            if(newPosition.getLadder()!=0) {if (findLadder(newPosition.getRight(),newPosition.getLadder(), newPosition.getPlayer1(), player)) newPosition.setPlayer1(null); System.out.println("escalera");}
+            else if(newPosition.getSnake()!='0') {if (findSnakeTail(newPosition.getLeft(), newPosition.getSnake(), newPosition.getPlayer1(), player)) newPosition.setPlayer1(null); System.out.println("serpiente");}
+            else System.out.println("se ha movido a la posicion "+ newPosition.getNumber());      
         }
         else if(pointer!=null && pointer.getPlayer2()!=null&& pointer.getPlayer2().getSymbol()==player) {
 
             Node newPosition= findNode(head, pointer.getNumber()+num);
             newPosition.setPlayer2(pointer.getPlayer2());
             pointer.setPlayer2(null);
-            if(newPosition.getLadder()!=0) movePlayer(newPosition, player, findLadder(newPosition.getRight(), newPosition.getLadder()).getNumber()-newPosition.getNumber());
-            if(newPosition.getSnake()!='0') movePlayer(newPosition, player, findSnake(head, newPosition.getNumber()-newPosition.getSnake()).getNumber());
-
+            if(newPosition.getLadder()!=0) {if (findLadder(newPosition.getRight(),newPosition.getLadder(), newPosition.getPlayer2(), player)) newPosition.setPlayer2(null); System.out.println("escalera");}
+            else if(newPosition.getSnake()!='0') {if (findSnakeTail(newPosition.getLeft(), newPosition.getSnake(), newPosition.getPlayer2(), player)) newPosition.setPlayer2(null); System.out.println("serpiente");}
+            else System.out.println("se ha movido a la posicion "+ newPosition.getNumber());   
         }
         else if(pointer!=null && pointer.getPlayer3()!=null&& pointer.getPlayer3().getSymbol()==player) {
             Node newPosition= findNode(head, pointer.getNumber()+num);
             newPosition.setPlayer3(pointer.getPlayer3());
             pointer.setPlayer3(null);
-            if(newPosition.getLadder()!=0) movePlayer(newPosition, player, findLadder(newPosition.getRight(), newPosition.getLadder()).getNumber()-newPosition.getNumber());
-            if(newPosition.getSnake()!='0') movePlayer(newPosition, player, findSnake(head, newPosition.getNumber()-newPosition.getSnake()).getNumber());
-
+            if(newPosition.getLadder()!=0) {if (findLadder(newPosition.getRight(),newPosition.getLadder(), newPosition.getPlayer3(), player)) newPosition.setPlayer3(null); System.out.println("escalera");}
+            else if(newPosition.getSnake()!='0') {if (findSnakeTail(newPosition.getLeft(), newPosition.getSnake(), newPosition.getPlayer3(), player)) newPosition.setPlayer3(null); System.out.println("serpiente");}
+            else System.out.println("se ha movido a la posicion "+ newPosition.getNumber());   
         }
-        else movePlayer(pointer.getRight(),player, num);// recursion hasta que encuentre el nodo en el que esta el jugador
+        else if(pointer!=null)movePlayer(pointer.getRight(),player, num);// recursion hasta que encuentre el nodo en el que esta el jugador
 
     }
 
@@ -150,7 +161,6 @@ public class LinkedList {
         }
         return string;
     }
-
 
     private String print(Node pointer, int x, int n, int m){
        String string="";
@@ -182,7 +192,6 @@ public class LinkedList {
         return string; 
     }
 
-
     public String showSnakesAndLadders(int n, int m){
     
         String string="";
@@ -195,7 +204,6 @@ public class LinkedList {
         }
         return string;
     }
-
 
     private String showSnakesAndLadders(Node pointer, int x, int n, int m){
        String string="";

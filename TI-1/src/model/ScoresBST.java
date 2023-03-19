@@ -30,18 +30,18 @@ public class ScoresBST {
 
     }
 
-    public String printFromRight(){
-        String scores="";
-        return printFromRight(root, scores);
+    public String printBSTFromRight(){
+        return printBSTFromRight(root);
     }
-wdjkjdhc
-    private String printFromRight(Score pointer, String scores){
-        if(pointer !=null){
-            printFromRight(pointer.getRight(),scores);
-            scores+=pointer.getScore()+" ";
-            printFromRight(pointer.getLeft(),scores);
 
+    private String printBSTFromRight(Score root) {
+        if (root == null) {
+            return "";
         }
-        return scores;
+        String right = printBSTFromRight(root.getRight()); // recursively print right subtree
+        String current = root.getScore() + " "; // print current node
+        String left = printBSTFromRight(root.getLeft()); // recursively print left subtree
+        return right + current + left;
     }
+
 }

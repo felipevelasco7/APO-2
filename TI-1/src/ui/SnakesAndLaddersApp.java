@@ -10,10 +10,8 @@ public class SnakesAndLaddersApp{
     public static void main(String args[]) {
         SnakesAndLaddersApp objMain= new SnakesAndLaddersApp();
         controler= new Controler();
-        //menu();
+        menu();        
 
-        controler.generateBoard(5, 5, 4, 4);
-        
     }
 
     public static void menu(){
@@ -49,15 +47,16 @@ public class SnakesAndLaddersApp{
         }
         long endTime = System.currentTimeMillis();
         System.out.println(controler.calculateScore(endTime, startTime, currentPlayer));
+        System.out.println("Mejores Puntajes: \n"+controler.showHighScores());
         
     }
 
     public static void turnMenu(int currentPlayer){
         String player;
         if(currentPlayer==0) player="$";
-        if(currentPlayer==1) player="%";
+        else if(currentPlayer==1) player="%";
         else player="&";
-        System.out.println("Jugador "+ player +", es tu turno /n 1. Tirar dado \n 2. Ver escaleras y serpientes");
+        System.out.println("Jugador "+ player +", es tu turno \n 1. Tirar dado \n 2. Ver escaleras y serpientes");
         String option=input.nextLine();
 
             switch(option){
@@ -78,16 +77,23 @@ public class SnakesAndLaddersApp{
             }
     }
 
-
     public static void generateBoard(){
         System.out.println("Ingrese el numero de columnas (x)");
         int n=input.nextInt();        input.nextLine();
         System.out.println("Ingrese el numero de filas (y)");
         int m=input.nextInt();        input.nextLine();
-        System.out.println("Ingrese el numero de serpientes");
+
+        System.out.println("Ingrese el numero de serpientes ");
         int s=input.nextInt();        input.nextLine();
         System.out.println("Ingrese el numero de escaleras");
         int e=input.nextInt();        input.nextLine();
+
+        while((e*2 + s*2) > (n*m-2)){
+            System.out.println("Ingrese un numero de serpientes menor");
+            s=input.nextInt();        input.nextLine();
+            System.out.println("Ingrese un numero de escaleras menor");
+            e=input.nextInt();        input.nextLine();
+        }
         System.out.println(controler.generateBoard(n,m,s,e));
 
     }

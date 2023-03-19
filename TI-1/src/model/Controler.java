@@ -15,7 +15,7 @@ public class Controler {
 
     public Controler(){
         list = new LinkedList();
-        ScoresBST highScores = new ScoresBST();
+        highScores = new ScoresBST();
 
     }
 
@@ -54,13 +54,13 @@ public class Controler {
 
     public String calculateScore(long endTime, long startTime, int currentPlayer){
 
-        long t = endTime - startTime;
+        long t = startTime - endTime;
         double puntaje = (600 - t) / 6;
         addScore(puntaje);
         String player;
-        if(currentPlayer==0) player="$";
-        if(currentPlayer==1) player="%";
-        else player="&";
+        if(currentPlayer==0) player="&";
+        if(currentPlayer==1) player="$";
+        else player="%";
 
         String msg= player+ " es el Ganador! El puntaje final es: "+ puntaje;
         
@@ -73,7 +73,7 @@ public class Controler {
     }
 
     public String showHighScores(){
-        return highScores.printFromRight();
+        return highScores.printBSTFromRight();
 
     }
 
