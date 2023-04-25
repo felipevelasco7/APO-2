@@ -1,0 +1,4 @@
+Hola desde el archivo de texto
+linea 2
+tercera linea 
+Otra linea
