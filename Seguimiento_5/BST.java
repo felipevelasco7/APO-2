@@ -33,10 +33,7 @@ public class BST {
         else{
             return getMax(pointer.getRight(), counter+1);
         }
-        
     } 
-
-
 
     public void printFromRight(){
         printFromRight(root);
