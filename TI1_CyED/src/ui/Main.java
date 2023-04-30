@@ -7,7 +7,6 @@ public class Main {
     public static Controller controller;
 
     public static void main(String[] args) throws Exception{
-        System.out.println("Hello world!");
         // String currentDirectory = System.getProperty("user.dir");
         // System.out.println("Current working directory: " + currentDirectory);
         controller= new Controller();
