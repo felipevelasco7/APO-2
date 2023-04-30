@@ -1,7 +1,5 @@
 package model;
 
-import java.util.PriorityQueue;
-
 class Node<V> {
     V data;
     double priority;
@@ -21,7 +19,7 @@ class Node<V> {
     }
 
 }
-class PriorityQ<V> {
+public class PriorityQ<V> {
     public Node<V> head;
 
     public PriorityQ(){
@@ -58,7 +56,7 @@ class PriorityQ<V> {
         }
     }
     public void push(V d, double p, int o) {
-        Node<V> temp = new Node(d, p);
+        Node<V> temp = new Node(d, p,o);
         if(head == null) {
             head = temp;
         } else {

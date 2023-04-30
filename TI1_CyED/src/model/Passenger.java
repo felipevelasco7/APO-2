@@ -11,6 +11,7 @@ public class Passenger {
     public int priority;
     public String column;
     public int arrivalOrder;
+    private boolean firstClass =false;
 
     public Passenger(String name, String id,  int row, String column, int miles, boolean older, boolean specialNeeds, boolean travelsWithBaby) {
         this.name = name;
@@ -21,6 +22,7 @@ public class Passenger {
         this.travelsWithBaby = travelsWithBaby;
         this.row = row;
         this.column = column;
+        firstClass=true;
 
         priority=miles/100;
         if (older)priority++;
@@ -35,11 +37,10 @@ public class Passenger {
         this.column = column;
     }
 
-    public void printPassenger(){
-
-        String info = "Nombre; "+name+" Id:"+id+" Fila: "+row+" Columna:"+column+"\n millas:"+miles+" Adulto Mayor: "+older+" Atencion Especial: "+specialNeeds+" Bebe:"+travelsWithBaby;
-        System.out.println(info);
-
+    public String printPassenger(){
+        String info = "Nombre: "+name+" Id: "+id+" Fila: "+row+" Columna:"+column;
+        if(firstClass) info += "\n millas:"+miles+" Adulto Mayor: "+older+" Atencion Especial: "+specialNeeds+" Bebe:"+travelsWithBaby;
+        return info;
     }
 
     public int getArrivalOrder() {
@@ -48,6 +49,9 @@ public class Passenger {
 
     public void setArrivalOrder(int arrivalOrder) {
         this.arrivalOrder = arrivalOrder;
+    }
+    public int getPriority() {
+        return priority;
     }
 
 }

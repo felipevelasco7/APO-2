@@ -14,7 +14,7 @@ public class Controller {
 
     public String loadInfo(String pathName) throws Exception{
         reader = new FileReader(pathName);
-        return reader.showPlainSpecifications();
+        return reader.showPlaneSpecifications();
     }
 
     public String readArrivals(){
@@ -38,7 +38,6 @@ public class Controller {
                 boardingOrder.get(row).push(p, -1* p.arrivalOrder);
             }
         }
-
 
         String order="";
         for(PriorityQ<Passenger> rowBoarding: boardingOrder){

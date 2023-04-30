@@ -81,7 +81,14 @@ public class FileReader {
     public ArrayList<String> getArrivals() {
         return arrivals;
     }
-    public String showPlainSpecifications() {
+    public String get1Passenger(int arrvNumber) {
+        return arrivals.get(arrvNumber-1);
+    }
+
+    public String get1Arrival(int arrvNumber) {
+        return arrivals.get(arrvNumber-1);
+    }
+    public String showPlaneSpecifications() {
         return "Plane rows: "+ planeRows+ "  Plane columns: "+ planeColumns+"  Plane first class: "+ planeFirstClassRows;
     }
     public String showArrivals() {
@@ -92,6 +99,4 @@ public class FileReader {
         return arrv;
     }
 
-    public void showPassengers() {
-    }
 }
