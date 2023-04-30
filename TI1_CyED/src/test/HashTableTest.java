@@ -17,6 +17,29 @@ public class HashTableTest extends TestCase{
         hashTable.insert("5493",p3);
     }
 
+    public void testInsert() throws Exception {
+        setupStage1();
+        Passenger  p1  = new Passenger("Jimmy","1193",4, "B");
+        try {
+            hashTable.insert("1193",p1);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+    public void testSearch() throws Exception {
+        setupStage1();
+        Passenger p= (Passenger) hashTable.search("1193");
+        String id= p.getId();
+        assertEquals("1193",id );
+    }
+
+    public void testInsert2() throws Exception {
+        setupStage1();
+        Passenger  p1  = new Passenger("Jimmy","2340",4, "B",100, true,true,false);
+        hashTable.insert("2340",p1);
+        assertEquals(p1, hashTable.search("2340"));
+
+    }
 
 
 }

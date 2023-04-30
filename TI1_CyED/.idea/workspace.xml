@@ -4,16 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0ef629ee-7f33-4a94-ac15-e9afef9a2aa1" name="Changes" comment="Airline System Completo">
-      <change afterPath="$PROJECT_DIR$/src/test/HashTableTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/PriorityQTest.java" afterDir="false" />
+    <list default="true" id="0ef629ee-7f33-4a94-ac15-e9afef9a2aa1" name="Changes" comment="SetupStages de las clases de prueba">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/FileReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/FileReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/HashTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/HashTable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/Passenger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Passenger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/PriorityQ.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/PriorityQ.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/FileReaderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/FileReaderTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/PassengerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/PassengerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/HashTableTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/HashTableTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/PriorityQTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/PriorityQTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,16 +78,83 @@
       <recent name="$PROJECT_DIR$/src/ui" />
     </key>
   </component>
-  <component name="RunManager">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="ui.Main" />
+  <component name="RunManager" selected="JUnit.HashTableTest.testInsert2">
+    <configuration name="FileReaderTest.testFileReader" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="AirlineSystem_TI1_CyED" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="ui.*" />
+          <option name="PATTERN" value="test.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="test" />
+      <option name="MAIN_CLASS_NAME" value="test.FileReaderTest" />
+      <option name="METHOD_NAME" value="testFileReader" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FileReaderTest.testGet1Arrival" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="AirlineSystem_TI1_CyED" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="test" />
+      <option name="MAIN_CLASS_NAME" value="test.FileReaderTest" />
+      <option name="METHOD_NAME" value="testGet1Arrival" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="HashTableTest.testInsert" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="AirlineSystem_TI1_CyED" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="test" />
+      <option name="MAIN_CLASS_NAME" value="test.HashTableTest" />
+      <option name="METHOD_NAME" value="testInsert" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="HashTableTest.testInsert2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="AirlineSystem_TI1_CyED" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="test" />
+      <option name="MAIN_CLASS_NAME" value="test.HashTableTest" />
+      <option name="METHOD_NAME" value="testInsert2" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="HashTableTest.testSearch" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="AirlineSystem_TI1_CyED" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="test" />
+      <option name="MAIN_CLASS_NAME" value="test.HashTableTest" />
+      <option name="METHOD_NAME" value="testSearch" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -109,7 +174,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.HashTableTest.testInsert2" />
+        <item itemvalue="JUnit.HashTableTest.testSearch" />
+        <item itemvalue="JUnit.HashTableTest.testInsert" />
+        <item itemvalue="JUnit.FileReaderTest.testFileReader" />
+        <item itemvalue="JUnit.FileReaderTest.testGet1Arrival" />
       </list>
     </recent_temporary>
   </component>
@@ -122,7 +191,7 @@
       <option name="presentableId" value="Default" />
       <updated>1682560357575</updated>
       <workItem from="1682560359042" duration="7460000" />
-      <workItem from="1682722951123" duration="41145000" />
+      <workItem from="1682722951123" duration="49202000" />
     </task>
     <task id="LOCAL-00001" summary="Airline System Completp">
       <created>1682862105259</created>
@@ -131,7 +200,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682862105259</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="SetupStages de las clases de prueba">
+      <created>1682872086693</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1682872086693</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -139,6 +215,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Airline System Completp" />
-    <option name="LAST_COMMIT_MESSAGE" value="Airline System Completp" />
+    <MESSAGE value="SetupStages de las clases de prueba" />
+    <option name="LAST_COMMIT_MESSAGE" value="SetupStages de las clases de prueba" />
   </component>
 </project>

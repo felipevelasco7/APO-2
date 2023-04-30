@@ -41,7 +41,7 @@ public class HashTable<K extends Comparable,V> {
             map[hash(key)].add(nv);
         }
         else {
-            throw new Exception("Key ya existente!");
+            throw new Exception("Id ya existente!");
         }
     }
 

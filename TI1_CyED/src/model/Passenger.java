@@ -53,5 +53,7 @@ public class Passenger {
     public int getPriority() {
         return priority;
     }
-
+    public String getId() {
+        return id;
+    }
 }

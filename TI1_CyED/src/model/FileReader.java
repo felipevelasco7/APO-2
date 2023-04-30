@@ -8,6 +8,7 @@ public class FileReader {
     private File myObj;
     private Scanner myReader;
     private ArrayList<String> readLines;
+
     public int planeRows;
     public int planeColumns;
     public int planeFirstClassRows;
@@ -81,9 +82,6 @@ public class FileReader {
     public ArrayList<String> getArrivals() {
         return arrivals;
     }
-    public String get1Passenger(int arrvNumber) {
-        return arrivals.get(arrvNumber-1);
-    }
 
     public String get1Arrival(int arrvNumber) {
         return arrivals.get(arrvNumber-1);
@@ -97,6 +95,10 @@ public class FileReader {
             arrv+="\n "+(i+1)+". "+arrivals.get(i);
         }
         return arrv;
+    }
+
+    public String getReadLine(int i){
+        return readLines.get(i-1);
     }
 
 }
