@@ -22,6 +22,7 @@ public class Controller {
     public String registerOrder(String buyerName, String listOfProducts, String dateOfSale){
         String msg="";
         String[] productNamesArray = listOfProducts.split(",");
+        for
 
         Product[] productsArray = new Product[5];
 

@@ -1,0 +1,41 @@
+/**** Plane definition section ****/
+4 // Rows in the plane:
+D // Columns on the plane
+2 // First Class
+
+/**** model.Passenger Database ****/
+//name, id, row, colum, miles, older, specialNeeds, travelsWithBaby
+carlos,111,1,A,10,true,false,false
+miguel,222,1,B,10,true,false,true
+sebastian,333,1,C,10,true,false,false
+Esteban,444,1,D,100,true,false,false
+jorge,555,2,A,10,true,false,false
+andrea,666,2,B,5000,true,false,false
+carlos,777,2,C,10,true,true,false
+carlos,888,2,D,10,true,false,false
+carlos,999,3,A,10,true,false,false
+miguel,010,3,B,10,true,false,false
+sebastian,011,3,C,10,true,false,false
+Esteban,012,3,D,10,true,false,false
+carlos,013,4,A,10,true,false,false
+miguel,014,4,B,10,true,false,false
+sebastian,015,4,C,10,true,false,false
+Esteban,016,4,D,10,true,false,false
+
+/**** Arrival ****/
+010
+016
+011
+012
+013
+014
+333
+222
+444
+555
+666
+777
+888
+999
+015
+111
