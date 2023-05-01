@@ -3,21 +3,18 @@ import model.Controller;
 import java.util.Scanner;
 public class Main {
     public static Scanner input=new Scanner(System.in);
-
     public static Controller controller;
 
     public static void main(String[] args) throws Exception{
-        // String currentDirectory = System.getProperty("user.dir");
-        // System.out.println("Current working directory: " + currentDirectory);
+
         controller= new Controller();
         menu();
-
     }
     public static void menu() throws Exception{
         System.out.println("Menu");
         String opt=" ";
         while (!opt.equalsIgnoreCase("1")) {
-            System.out.println("Ingrese el numero de la opcion que desea realizar: \n 1.Cargar Pasajeros ");
+            System.out.println("Ingrese el numero de la opcion que desea realizar: \n  1.Cargar Pasajeros ");
             opt=input.nextLine();
         }
         System.out.println(controller.loadInfo("Data.txt"));
