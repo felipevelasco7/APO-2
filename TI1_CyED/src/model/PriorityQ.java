@@ -25,7 +25,6 @@ class Node<V> {
 }
 public class PriorityQ<V> {
     public Node<V> head;
-
     public PriorityQ(){
         head = null;
     }
