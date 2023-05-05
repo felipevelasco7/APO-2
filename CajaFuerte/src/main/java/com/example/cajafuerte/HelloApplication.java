@@ -1,4 +1,4 @@
-package com.example.demojavafx;
+package com.example.cajafuerte;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -20,5 +20,4 @@ public class HelloApplication extends Application {
     public static void main(String[] args) {
         launch();
     }
-
 }

@@ -9,18 +9,33 @@ public class Order {
     private Product[] productsArray;
 
 
-    public Order(String buyerName, String listOfProducts, String dateOfSale, double totalPrice, Product[] productsArray){
+    public Order(String buyerName, String listOfProducts, String dateOfSale, Product[] productsArray){
 
         this.buyerName=buyerName;
         this.listOfProducts=listOfProducts;
         this.dateOfSale=dateOfSale;
-        this.totalPrice=totalPrice;
+        this.totalPrice=calculateTotalPrice();
         this.productsArray=productsArray;
 
     }
 
+    private double calculateTotalPrice() {
+        return 0;
+    }
 
+    public String getBuyerName() {
+        return buyerName;
+    }
 
+    public void setBuyerName(String buyerName) {
+        this.buyerName = buyerName;
+    }
 
+    public double getTotalPrice() {
+        return totalPrice;
+    }
 
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
 }

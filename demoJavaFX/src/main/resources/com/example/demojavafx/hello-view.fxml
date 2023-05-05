@@ -10,9 +10,10 @@
     </padding>
 
     <Label fx:id="welcomeText" text="Hola" />
-    <Button onAction="#onHelloButtonClick" text="Hello!" />
+    <Button maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onHelloButtonClick" text="Hello!" />
    <HBox prefHeight="100.0" prefWidth="200.0">
       <children>
-         <CheckBox mnemonicParsing="false" text="Opcion 1" />
+         <CheckBox fx:id="okCheckBox" mnemonicParsing="false" onAction="#okCheckBox" text="ok" />
+         <ColorPicker fx:id="colorPkr" onAction="#onColorPicker" />
       </children></HBox>
 </VBox>

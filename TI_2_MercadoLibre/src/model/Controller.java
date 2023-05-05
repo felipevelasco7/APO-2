@@ -3,8 +3,8 @@ package model;
 import java.util.ArrayList;
 
 public class Controller {
-    private ArrayList<Product> products;
-    private ArrayList<Order> orders;
+    public ArrayList<Product> products;
+    public ArrayList<Order> orders;
 
     public Controller(){
         products=new ArrayList<Product>();
@@ -22,16 +22,24 @@ public class Controller {
     public String registerOrder(String buyerName, String listOfProducts, String dateOfSale){
         String msg="";
         String[] productNamesArray = listOfProducts.split(",");
-        for
 
         Product[] productsArray = new Product[5];
 
-        Order objOrder= new Order(buyerName, listOfProducts, dateOfSale, totalPrice, productsArray);
+        Order objOrder= new Order(buyerName, listOfProducts, dateOfSale, productsArray);
         orders.add(objOrder);
         msg="Orden agregada exitosamente";
         return msg;
     }
 
+    public String deleteProduct(String productName){
+        return "Producto eliminado exitosamente";
+
+    }
+
+    public String IncreaseQuantity(String productName,int amount){
+        return "Cantidad actualizada exitosamente";
+
+    }
 
 
     public Product searchProductbyName(String productName){
@@ -60,5 +68,19 @@ public class Controller {
             return searchProductIndex(productName, mid + 1, end);
         }
 
+    }
+
+    public String findProducts(String minProdName, String maxProdName, int aORd) {
+        return " ";
+    }
+    public String findProducts(double minPrice, double maxPrice, int aORd) {
+        return " ";
+    }
+
+    public String findOrders(String minBuyerName, String maxBuyerName, int aORd) {
+        return " ";
+    }
+    public String findOrders(double minPrice, double maxPrice, int aORd) {
+        return " ";
     }
 }
