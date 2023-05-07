@@ -17,16 +17,16 @@
    <Label text="Escriba la combinacion para iniciar" />
    <HBox prefHeight="0.0" prefWidth="200.0">
       <children>
-         <PasswordField />
-         <PasswordField />
-         <PasswordField />
-         <PasswordField>
+         <PasswordField fx:id="pf1" onKeyPressed="#onKeyPressed" onKeyTyped="#onKeyTyped" />
+         <PasswordField fx:id="pf2" onKeyPressed="#onKeyPressed" onKeyTyped="#onKeyTyped" />
+         <PasswordField fx:id="pf3" onKeyPressed="#onKeyPressed" onKeyTyped="#onKeyTyped" />
+         <PasswordField fx:id="pf4" onKeyPressed="#onKeyPressed" onKeyTyped="#onKeyTyped">
             <opaqueInsets>
                <Insets />
             </opaqueInsets>
          </PasswordField>
-         <PasswordField />
-         <PasswordField />
+         <PasswordField fx:id="pf5" onKeyPressed="#onKeyPressed" onKeyTyped="#onKeyTyped" />
+         <PasswordField fx:id="pf6" onKeyPressed="#onKeyPressed" onKeyTyped="#onKeyTyped" />
       </children></HBox>
-    <Button onAction="#onAbrirButton" text="ABRIR" wrapText="true" />
+    <Button fx:id="abrirButton" onAction="#onAbrirButton" text="ABRIR" wrapText="true" />
 </VBox>

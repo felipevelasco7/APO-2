@@ -1,12 +1,22 @@
 package ui;
 
 
-public class Main {
+import model.Controller;
 
-    public static void main(String[] args) {
+public class Main {
+    public static Controller controller;
+
+
+    public static void main(String[] args)  {
         System.out.println("Hello world!");
+        controller= new Controller();
+        menu();
+
     }
 
+    private static void menu() {
+
+    }
 
 
 }

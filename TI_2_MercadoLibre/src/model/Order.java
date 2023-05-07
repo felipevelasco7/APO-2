@@ -5,22 +5,26 @@ public class Order {
     private String listOfProducts;
     private String dateOfSale;
     private double totalPrice;
-    private Product product;
     private Product[] productsArray;
 
 
-    public Order(String buyerName, String listOfProducts, String dateOfSale, Product[] productsArray){
+    public Order(String buyerName, String listOfProducts, String dateOfSale, Product[] pArray){
 
         this.buyerName=buyerName;
         this.listOfProducts=listOfProducts;
         this.dateOfSale=dateOfSale;
+        this.productsArray= pArray;
         this.totalPrice=calculateTotalPrice();
-        this.productsArray=productsArray;
+
 
     }
 
     private double calculateTotalPrice() {
-        return 0;
+        double totalPrice=0;
+        for (int i=0; i<productsArray.length;i++) {
+            totalPrice+=productsArray[i].getPrice();
+        }
+        return totalPrice;
     }
 
     public String getBuyerName() {
