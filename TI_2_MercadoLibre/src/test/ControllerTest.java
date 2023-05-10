@@ -1,6 +1,8 @@
 package test;
 import junit.framework.TestCase;
 import model.Controller;
+import model.Order;
+import model.Product;
 
 public class ControllerTest extends TestCase {
     private Controller controller;
@@ -39,7 +41,8 @@ public class ControllerTest extends TestCase {
     public void testIncreaseQuantity()  {
         setupStage2();
         System.out.println(controller.IncreaseQuantity("cuaderno",2));
-        assertEquals(5, controller.searchProductbyName("cuaderno").getQuantity());
+        Product prod= controller.products.get(controller.searchProductIndex("cuaderno", 0, controller.products.size()-1));
+        assertEquals(5, prod.getQuantity());
     }
 
     public void testIncreaseQuantity2(){
@@ -72,11 +75,11 @@ public class ControllerTest extends TestCase {
         assertEquals(0, controller.orders.size());
 
     }
-    public void testSearchProductbyName()  {
+    public void testSearchProductByName()  {
         setupStage2();
         System.out.println(controller.searchProductIndex("cuaderno", 0, 3-1));
-        System.out.println(controller.searchProductbyName("cuaderno").getProductName());
-        assertEquals("cuaderno", controller.searchProductbyName("cuaderno").getProductName());
+        Product prod= controller.products.get(controller.searchProductIndex("cuaderno", 0, controller.products.size()-1));
+        assertEquals("cuaderno", prod.getProductName());
     }
 
     public void testRegisterOrder2() {
@@ -88,20 +91,36 @@ public class ControllerTest extends TestCase {
 
     public void testFindProducts()  {
         setupStage2();
-        assertEquals("camisa\ncuaderno", controller.findProducts("C","M",1 ));
+        String msg="Productos en rango C a CA :\n" + "camisa";
+        assertEquals(msg, controller.findProducts("C","CA",1 )); //Con mayusculas
+
     }
     public void testFindProducts2()  {
         setupStage2();
-        assertEquals("audifonos\ncuaderno", controller.findProducts(20,30,1 ));
+        String msg="Productos en rango de precio 20.0 a 30.0 :" + "\ncuaderno precio: 23.0\naudifonos precio: 30.0" ;
+        assertEquals(msg, controller.findProducts(20,30,2 )); //en orden descendente
     }
     public void testFindOrders() {
         setupStage5();
-        assertEquals("camisa\ncuaderno", controller.findOrders("A","G",2 ));
+        String msg="Ordenes en rango A a G :\n" + "Gloria\n" + "Carlos"; //orden descendente
+        assertEquals(msg, controller.findOrders("A","G",2 ));
     }
     public void testFindOrders2()  {
         setupStage5();
-        assertEquals("audifonos\ncuaderno", controller.findOrders(0,50,1 ));
+        String msg="Ordenes en rango 0.0 a 50.0 :\n" + "Gloria 30.0\n" + "Simon 38.0";
+        assertEquals(msg, controller.findOrders(0,50,1 ));
+        controller.organizeOrdersByPrice();
     }
+    public void testOrganizeOrdersByPrice()  {
+        setupStage5();
+        controller.organizeOrdersByPrice();
+        assertEquals( 53.0, controller.orders.get(2).getTotalPrice());
+
+        controller.organizeOrdersByName();
+        assertEquals( "Gloria", controller.orders.get(1).getBuyerName());
+
+    }
+
 
 
 

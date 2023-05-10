@@ -29,4 +29,14 @@ Completitud = 13/6= 2,166
 
 
 …
+Iteración 3
+
+Densidad de errores-fallos = 0/14= 0
+
+Confiabilidad = 1
+
+Completitud = 14/6= 2,33
+
+
+…
 
