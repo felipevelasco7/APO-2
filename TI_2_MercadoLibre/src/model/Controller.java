@@ -1,48 +1,130 @@
 package model;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
+
+import com.google.gson.Gson;
+
+import java.nio.charset.StandardCharsets;
 
 
 public class Controller {
     public ArrayList<Product> products;
     public ArrayList<Order> orders;
+    public Gson gson;
 
     public Controller()  {
         products= new ArrayList<>();
         orders= new ArrayList<>();
+        gson = new Gson();
+        loadData();
+
     }
+
+    public void loadData(){
+        try {
+            File file = new File("data/products.txt");
+            File file2 = new File("data/orders.txt");
+
+            FileInputStream fis = new FileInputStream(file);
+            FileInputStream fis2 = new FileInputStream(file2);
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(fis));
+            BufferedReader reader2 = new BufferedReader(new InputStreamReader(fis2));
+
+            String json = "";
+            String line;
+            String json2 = "";
+            String line2;
+
+            if((line=reader.readLine())!=null){
+                json= line;
+            }
+            fis.close();
+
+            if((line2=reader2.readLine())!=null){
+                json2= line2;
+            }
+            fis2.close();
+
+            Product[] productsFromJson = gson.fromJson (json, Product[].class);
+            Order[] ordersFromJson = gson.fromJson (json2, Order[].class);
+
+            if(productsFromJson != null && ordersFromJson != null){
+
+                for(Product p : productsFromJson){
+                    products.add(p);
+                }
+                for(Order o : ordersFromJson) {
+                    orders.add(o);
+                }
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     //Registrar
     public String registerProducts(String productName, String description, double price, int quantity, int category){
         String msg="";
         Product objProd= new Product(productName, description, price, quantity,category);
-        products.add(objProd);
-        msg="Producto agregado exitosamente";
-        organizeProdByName();
+
+       if(searchProductIndex(productName,0,products.size()-1)<0) {
+            products.add(objProd);
+            msg = "Producto agregado exitosamente";
+            organizeProdByName();
+            String json = gson.toJson(products);
+            try {
+                FileOutputStream fos = new FileOutputStream(new File("data/products.txt"));
+                fos.write(json.getBytes(StandardCharsets.UTF_8));
+                fos.close();
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+       } else msg="Este producto ya esta registrado";
         return msg;
     }
     public String registerOrder(String buyerName, String listOfProducts, String dateOfSale) {
+        if(searchOrderIndex(buyerName,0,orders.size()-1)<0) {
+            String[] productNamesArray = listOfProducts.split(",");
+            Product[] productsArray = new Product[productNamesArray.length];
 
-        String[] productNamesArray = listOfProducts.split(",");
-        Product[] productsArray = new Product[productNamesArray.length];
-
-        for (int i = 0; i < productNamesArray.length; i++) {
-            int index=searchProductIndex(productNamesArray[i], 0, products.size()-1);
-            if (index>=0) {
-                Product prod= products.get(index);
-                productsArray[i] = prod;
-                productsArray[i].setQuantity(productsArray[i].getQuantity()-1);
-                productsArray[i].setNumberOfSales(productsArray[i].getNumberOfSales()+1);
+            for (int i = 0; i < productNamesArray.length; i++) {
+                int index = searchProductIndex(productNamesArray[i], 0, products.size() - 1);
+                if (index >= 0) {
+                    Product prod = products.get(index);
+                    productsArray[i] = prod;
+                    productsArray[i].setQuantity(productsArray[i].getQuantity() - 1);
+                    productsArray[i].setNumberOfSales(productsArray[i].getNumberOfSales() + 1);
+                } else return "El Producto " + productNamesArray[i] + " No esta registrado";
             }
-            else return "El Producto "+productNamesArray[i]+" No esta registrado";
-        }
 
-        Order objOrder= new Order(buyerName, listOfProducts, dateOfSale, productsArray,createDate(dateOfSale));
-        orders.add(objOrder);
-        System.out.println(objOrder + " precio "+ objOrder.getTotalPrice()+ objOrder.getBuyerName());
-        return "Orden agregada exitosamente";
+            Order objOrder = new Order(buyerName, listOfProducts, dateOfSale, productsArray, createDate(dateOfSale));
+            orders.add(objOrder);
+            System.out.println(objOrder + " precio " + objOrder.getTotalPrice() + objOrder.getBuyerName());
+
+
+            String json = gson.toJson(orders);
+            try {
+                FileOutputStream fos = new FileOutputStream(new File("data/orders.txt"));
+                fos.write(json.getBytes(StandardCharsets.UTF_8));
+                fos.close();
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return "Orden agregada exitosamente";
+        } return "Esta orden ya esta registrada";
     }
 
     //crear fecha
@@ -60,17 +142,33 @@ public class Controller {
     public String deleteProduct(String productName){
         int i=searchProductIndex(productName,0,products.size()-1);
         if(i==-1) return "Este producto no esta registrada";
-        else products.remove(i);
+        else {
+            products.remove(i);
+
+            String json = gson.toJson(products);
+            try {
+                FileOutputStream fos = new FileOutputStream(new File("data/products.txt"));
+                fos.write(json.getBytes(StandardCharsets.UTF_8));
+                fos.close();
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         return "Producto eliminado exitosamente";
 
     }
 
     //Agregar cantidades
     public String IncreaseQuantity(String productName,int amount){
-        Product prod= products.get(searchProductIndex(productName, 0, products.size()-1));
-        System.out.println(prod);
-        if(prod==null) return "Este Producto no esta registrado";
-        else prod.setQuantity(prod.getQuantity()+amount);
+        int index= searchProductIndex(productName, 0, products.size()-1);
+        if(index<0l) return "Este Producto no esta registrado";
+        else{
+            Product prod= products.get(index);
+            prod.setQuantity(prod.getQuantity()+amount);
+        }
 
         return "Cantidad actualizada exitosamente";
     }
@@ -104,7 +202,7 @@ public class Controller {
             }
         }
     }
-    private void organizeProdBySales() {
+    public void organizeProdBySales() {
         for (int i = 0; i < products.size(); i++) {
             for (int j = 1; j < products.size()-i; j++) {
                 if(products.get(j).getNumberOfSales() > products.get(j-1).getNumberOfSales()){
@@ -130,6 +228,18 @@ public class Controller {
             return products.get(productIndex).getProductInfo();
         } else { //no se encontro(-1) o no hay productos registrsdos(-2)
             return "Este producto no esta registradp";
+        }
+    }
+    public boolean exists(String productName){
+        organizeProdByName();
+        int x= products.size();
+        int productIndex=-2;
+        if(x>0) productIndex=searchProductIndex(productName, 0, x-1);
+
+        if (productIndex >=0) {
+            return true;
+        } else { //no se encontro(-1) o no hay productos registrsdos(-2)
+            return false;
         }
     }
     public int searchProductIndex(String productName, int start, int end){
@@ -166,7 +276,7 @@ public class Controller {
     public String searchProductByCat(int cat){
         String names="";
         for (Product p : products) {
-            String pName =p.getProductName();
+            String pName =p.getProductName() +" Categoria: "+p.getCategoryName();
             if(p.getCategory()==cat){
                 names+="\n"+pName;
             }
@@ -182,9 +292,9 @@ public class Controller {
             int midValue = products.get(mid).getNumberOfSales();
             if(midValue == sales){                                  //cuando lo encuentra
                 return products.get(mid).getProductInfo();
-            }else if(sales > midValue){
-                begin = mid+1;
             }else if(sales < midValue){
+                begin = mid+1;
+            }else if(sales > midValue){
                 end = mid-1;
             }
         }
@@ -283,7 +393,7 @@ public class Controller {
                 }
             }
         }
-        System.out.println(" Ordenes por nombre :\n"+orders);
+        System.out.println(" Ordenes por fecha :\n"+orders);
     }
 
 
@@ -387,12 +497,11 @@ public class Controller {
             if (p.getDate().after(minDate)&& p.getDate().before(maxDate)) {
 
                 String pName =p.getBuyerName()+" fecha: "+p.getDateOfSale();
-                if(aORd==2) names ="\n"+pName +names; //orden descendente
+                if(aORd==1) names ="\n"+pName +names; //orden descendente
                 else names+="\n"+pName; //ascendente
-                names+= " "+p.getTotalPrice();
             }
         }
-        names="Ordenes en rango de fecha"+ min+" a "+max+" :"+names;
+        names="Ordenes en rango de fecha "+ min+" a "+max+" :"+names;
         return names;
 
     }

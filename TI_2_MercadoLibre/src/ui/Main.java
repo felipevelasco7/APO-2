@@ -9,7 +9,6 @@ public class Main {
     public static void main(String[] args)  {
         controller= new Controller();
         menu();
-
     }
 
     private static void menu() {
@@ -57,7 +56,6 @@ public class Main {
         }
         if(!choice.equalsIgnoreCase("7")) menu();
     }
-
     private static void searchOrders() {
         System.out.println("Buscar ordenes");
         System.out.println("1. Para buscar por rango\n2. Para buscar una orden especifica");
@@ -176,7 +174,6 @@ public class Main {
                 searchProducts();
         }
     }
-
     private static void registerProduct() {
         System.out.println("Registrar producto");
 
@@ -185,11 +182,14 @@ public class Main {
         System.out.println("Ingrese la descripcion del producto");
         String descr= input.nextLine();
         System.out.println("Ingrese el precio del producto");
-        double price= input.nextDouble();
+        String pri= input.nextLine();
+        double price= Integer.parseInt(pri);
         System.out.println("Ingrese la cantidad del producto");
-        int quantity= Integer.parseInt(input.nextLine());
+        String cant=input.nextLine();
+        int quantity= Integer.parseInt(cant);
         System.out.println("Ingrese la categoria del producto: \n1. Libros \n2.Electrónica \n3.Ropa y accesorios \n4.Alimentos y bebidas \n5.Papelería \n6. Deportes \n7.Productos de belleza y cuidado personal \n8.Juguetes y juegos");
-        int cat= Integer.parseInt(input.nextLine());
+        String categ=input.nextLine();
+        int cat= Integer.parseInt(categ);
         System.out.println(controller.registerProducts(prodName,descr,price,quantity,cat));
     }
     private static void registerOrder() {
@@ -203,6 +203,5 @@ public class Main {
         String dateOfSale= input.nextLine();
         System.out.println(controller.registerOrder(buyer,prodList,dateOfSale));
     }
-
 
 }
