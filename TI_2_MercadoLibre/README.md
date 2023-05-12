@@ -49,4 +49,14 @@ Completitud = 20/6= 3,33
 
 
 …
+Iteración 5
+
+Densidad de errores-fallos = 0/26= 0
+
+Confiabilidad = 1
+
+Completitud = 26/6= 4,33
+
+
+…
 

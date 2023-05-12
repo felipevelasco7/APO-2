@@ -83,7 +83,10 @@ public class ControllerTest extends TestCase {
         Product prod= controller.products.get(controller.searchProductIndex("cuaderno", 0, controller.products.size()-1));
         assertEquals("cuaderno", prod.getProductName());
     }
-
+    public void testSearchProductByPrice()  {
+        setupStage2();
+        System.out.println(controller.searchProductByPrice(233));
+    }
     public void testRegisterOrder2() {
         setupStage2();
         System.out.println(controller.registerOrder("Carlos", "cuaderno,audifonos", "21/2/2023" ));
@@ -100,6 +103,11 @@ public class ControllerTest extends TestCase {
         setupStage2();
         String msg="Productos en rango de precio 20.0 a 30.0 :" + "\ncuaderno precio: 23.0\naudifonos precio: 30.0" ;
         assertEquals(msg, controller.findProducts(20,30,2 )); //en orden descendente
+    }
+    public void testFindProductsBySales()  {
+        setupStage2();
+        System.out.println(controller.findProductsBySales(10,40,2));//descendente
+
     }
     public void testFindOrders() {
         setupStage5();
@@ -125,13 +133,34 @@ public class ControllerTest extends TestCase {
     public void testOrganizeOrdersByDate()  {
         setupStage5();
         controller.organizeOrdersByDate();
-        System.out.println(controller.orders);
+        for(int i=0;i<controller.orders.size();i++){
+            System.out.println(controller.orders.get(i).getDate());
+        }
 
+    }
+    public void testOrganizeOrdersByName()  {
+        setupStage5();
+        controller.organizeOrdersByName();
+        for(int i=0;i<controller.orders.size();i++){
+            System.out.println(controller.orders.get(i).getBuyerName());
+        }
     }
 
     public void testFindOrdersByDate()  {
         setupStage5();
         System.out.println(controller.findOrdersByDate("11/3/2020","22/2/2023",1));
+    }
+    public void testSearchOrderByDate()  {
+        setupStage5();
+        System.out.println(controller.searchOrderByDate("21/2/2023" ));
+    }
+    public void testSearchOrderByPrice()  {
+        setupStage5();
+        System.out.println(controller.searchOrderByPrice(38.0 ));
+    }
+    public void testSearchOrderByName()  {
+        setupStage5();
+        System.out.println(controller.searchOrderByName("Simon" ));
     }
 
     public void testsSearchProductByCat()  {
@@ -146,6 +175,8 @@ public class ControllerTest extends TestCase {
         setupStage2();
         System.out.println(controller.searchProductByCat(1));
     }
+
+
 
 
 
