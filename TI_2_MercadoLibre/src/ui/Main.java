@@ -34,7 +34,8 @@ public class Main {
                 System.out.println("Aumentar cantidad de un producto:\nIngrese el nombre del producto:");
                 String prodName=input.nextLine();
                 System.out.println("Ingrese la cantidad a aumentar");
-                int amount=Integer.parseInt(input.nextLine());
+                String a=input.nextLine();
+                int amount=Integer.parseInt(a);
                 System.out.println(controller.IncreaseQuantity(prodName, amount));
                 break;
             case "4":
@@ -182,8 +183,7 @@ public class Main {
         System.out.println("Ingrese la descripcion del producto");
         String descr= input.nextLine();
         System.out.println("Ingrese el precio del producto");
-        String pri= input.nextLine();
-        double price= Integer.parseInt(pri);
+        double price= input.nextDouble();
         System.out.println("Ingrese la cantidad del producto");
         String cant=input.nextLine();
         int quantity= Integer.parseInt(cant);
