@@ -7,4 +7,6 @@ module com.example.demojavafx {
     exports com.example.demojavafx;
     exports com.example.demojavafx.control;
     opens com.example.demojavafx.control to javafx.fxml;
+    exports com.example.demojavafx.threads_intro;
+    opens com.example.demojavafx.threads_intro to javafx.fxml;
 }
