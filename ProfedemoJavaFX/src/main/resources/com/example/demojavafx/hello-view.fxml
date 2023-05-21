@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demojavafx.control.HelloController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+   <BorderPane prefHeight="200.0" prefWidth="200.0">
+      <left>
+         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="150.0" BorderPane.alignment="CENTER">
+            <children>
+            
+                <Label fx:id="welcomeText" />
+                <Button onAction="#onHelloButtonClick" text="Hello!" />
+               <CheckBox fx:id="checkTerminos" mnemonicParsing="false" text="Aceptar términos y condiciones" />
+               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                  <children>
+                     <RadioButton fx:id="rbopcion1" mnemonicParsing="false" selected="true" text="Opcion1">
+                        <toggleGroup>
+                           <ToggleGroup fx:id="rbgroup" />
+                        </toggleGroup>
+                     </RadioButton>
+                     <RadioButton mnemonicParsing="false" text="opcion2" toggleGroup="$rbgroup" />
+                  </children>
+               </HBox>
+               <Button mnemonicParsing="false" onAction="#onOpenWindow" text="Open another Window" />
+            </children>
+         </VBox>
+      </left>
+      <center>
+         <TableView fx:id="tablePerson" prefHeight="200.0" prefWidth="164.0" BorderPane.alignment="CENTER">
+           <columns>
+             <TableColumn fx:id="colName" prefWidth="75.0" text="Nombres" />
+             <TableColumn fx:id="colLastname" prefWidth="75.0" text="Apellidos" />
+               <TableColumn fx:id="colGender" prefWidth="75.0" text="Genero" />
+               <TableColumn fx:id="colDate" prefWidth="75.0" text="Fecha Nacimiento" />
+           </columns>
+         </TableView>
+      </center>
+      <right>
+         <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+            <children>
+               <TextField fx:id="tfName" promptText="Nombres" />
+               <TextField fx:id="tfLastname" promptText="Apellidos" />
+               <ChoiceBox fx:id="cbGender" prefWidth="150.0" />
+               <DatePicker fx:id="dpDate" />
+               <Button alignment="CENTER" mnemonicParsing="false" onAction="#onAddPerson" text="Agregar">
+                  <VBox.margin>
+                     <Insets top="10.0" />
+                  </VBox.margin>
+               </Button>
+            </children>
+         </VBox>
+      </right></BorderPane>
+</VBox>
