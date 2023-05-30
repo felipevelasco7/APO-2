@@ -37,6 +37,7 @@ public class HelloController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
+
             image=new Image("https://i.pinimg.com/474x/55/c8/50/55c8508e84a265352253f3de3a832d6b.jpg");
 //            String imagePath = "src/main/resources/images/img.png";
 //            this.image = new Image(imagePath);
@@ -49,12 +50,9 @@ public class HelloController implements Initializable {
         createEnemies();
         setCanvasEvents();
 
-
         t1=new Timeline(new KeyFrame(Duration.millis(10),e->play()));
         t1.setCycleCount(Timeline.INDEFINITE);
         t1.play();
-
-
     }
 
     private void play() {
@@ -121,6 +119,7 @@ public class HelloController implements Initializable {
             checkCollision(point);
         });
     }
+
     private void checkCollision(Point2D point) {
         for (Enemy enemy : enemyArray) {
             if (!enemy.isKilled() && enemy.isActive() && enemy.getShape().contains(point)&& !enemy.isReadyToErase()) {

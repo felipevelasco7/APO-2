@@ -73,7 +73,7 @@ public class Controller {
         String msg="";
         Product objProd= new Product(productName, description, price, quantity,category);
 
-       if(searchProductIndex(productName,0,products.size()-1)<0) {
+       if(searchProductIndex(productName,0,products.size()-1) < 0) {
             products.add(objProd);
             msg = "Producto agregado exitosamente";
             organizeProdByName();

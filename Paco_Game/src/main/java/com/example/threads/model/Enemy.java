@@ -25,7 +25,7 @@ public class Enemy{
         this.startTime=System.currentTimeMillis()+ random.nextInt(9001) + 2000;;
         this.time=time;
         this.endTime=startTime+time;
-        this.size = 50;
+        this.size = 20;
         this.x = random.nextInt((int) (gc.getCanvas().getWidth() - size));
         this.y = random.nextInt((int) (gc.getCanvas().getHeight() - size));
         this.gc = gc;
